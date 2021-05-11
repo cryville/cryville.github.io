@@ -1,0 +1,12 @@
+{
+	"format": 0,
+	"static": true,
+	"crypto": "chx:sha256",
+	"crypto_key": "sha256.chxkey",
+	"main_objs": [
+		"2a0070d014bc41cb1fb0e65f98a3c94e00478a2501dca02836d2d5eb3a742a62",
+		"80f189984e5ca70287d13342f6daa0db45cba3c131c4e46dc81360f3a4c4f690",
+		"99c030754b69261444a37f5d6def839a9df98ec9df8a7666625ce8029c68f7cd",
+		"cc57fc1903e444cf6a726490b43b27ee9f87facc037f86872201847c565b45fb"
+	]
+}

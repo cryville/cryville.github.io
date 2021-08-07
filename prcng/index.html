@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<style>
+	* {
+		padding: 0;
+		margin: 0;
+	}
+	act, tex {
+		display: none;
+	}
+	#errors {
+		color: red;
+	}
+</style>
+<script src="jquery-3.6.0.min.js"></script>
+<script src="pixi.min.js"></script>
+<script src="bezier-easing.js"></script>
+<body>
+<div id="stage"></div>
+<ul id="errors"></ul>
+<tex>
+	<chara i="001_00">00</chara>
+	<chara i="002_00">10</chara>
+	<chara i="003_00">04</chara>
+	<scene i="00">00</scene>
+</tex>
+<act id="opening">
+	<scene i="00">00</scene>
+	<profile><chara i="001">Chartlace</chara>00</profile>
+	<profile self><chara i="002">Viloviar</chara>00</profile>
+	<line><chara i="002" exp="10"></chara>Is it fine after all?</line>
+	<line><chara i="001" exp="00"></chara>Of course, trust me this time.</line>
+	<line><chara i="002"></chara>Well... Alright...</line>
+	<comment>Viloviar falls asleep</comment>
+	<sound>Explosion</sound>
+	<comment>Viloviar wakes up, and turns her head towards Chartlace</comment>
+	<line><chara i="001"></chara>Vilo.</line>
+	<line><chara i="002"></chara>?</line>
+	<line><chara i="001"></chara>I think we've got a big deal tonight.</line>
+	<line aside>That's when my nightmare about to begin...</line>
+</act>
+<act id="prologue">
+	<scene i="00">00</scene>
+	<profile><chara i="001">Chartlace</chara>00</profile>
+	<profile self><chara i="002">Viloviar</chara>00</profile>
+	<profile><chara i="003">Joan</chara>00</profile>
+	<chara i="001" exp="00"></chara>
+	<chara i="002" exp="10"></chara>
+	<line aside><speed>15</speed>Chartlace P. T...</line>
+	<line aside>Five years ago, we arrived at this town, where we met Joan and Cilyar.</line>
+	<line aside>We gather together whenever we have time...</line>
+	<chara i="001" pos="-1;.5,0,0,.58,1"></chara>
+	<chara i="003" pos="2" ready></chara>
+	<line><chara i="003" pos="1;.5,0,0,.58,1" enter="fade;.5"></chara><speed>20</speed>Charlie!</line>
+	<line><chara i="001"></chara>Good evening, Joan.</line>
+	<comment>It is morning now actually</comment>
+	<line><chara i="003"></chara>Is Viloviar spare today? There's something emergency in the church. I have to give up my work today.</line>
+	<line><chara i="001"></chara>Really? Hope the fire doesn't act so wild this time.</line>
+	<choices>
+		<choice i="prologue-1">Accept to offer help</choice>
+		<choice i="prologue-2">Refuse to offer help</choice>
+	</choices>
+	<branch i="prologue-1">
+		<line><chara i="001"></chara>So what do you expect me to do?</line>
+		<line><chara i="003"></chara>You know, the lighthouse job. Thanks a lot.</line>
+		<line><chara i="001"></chara>It doesn't matter! We're best friends, aren't we?</line>
+		<line><chara i="001"></chara>I heard that there is a new clothing shop that opened yesterday. How about taking a look after everything is done?</line>
+	</branch>
+	<branch i="prologue-2">
+		<line><chara i="001"></chara>Uhh, it's hard to say...</line>
+		<line><chara i="001"></chara>Cilyar may be spare now. Honestly, we're a little bit busy today, so...</line>
+		<line><chara i="001"></chara>Don't worry, it doesn't matter if you just get absent once, right?</line>
+		<line><chara i="003"></chara>It heard that a new clothing shop opened yesterday...</line>
+		<line><chara i="003"></chara>Since everybody is busy today, I guess I really have to give up something...</line>
+		<line><chara i="001"></chara><sound>sigh</sound> I guess I have to give up something as well.</line>
+		<line><chara i="001"></chara>It is said that a true true friend helps a friend in need. Yeah? <!-- My Little Pony --></line>
+	</branch>
+	<chara i="001" leave="fade;.5"></chara>
+	<chara i="003" leave="fade;.5"></chara>
+	<comment>Viloviar smiles</comment>
+	<line aside><speed>15</speed>...</line>
+	<line aside>Neither too wide nor too narrow, there's just some space enough for us two to live our days.</line>
+	<chara i="001" pos="0" enter="fade;.5"></chara>
+	<line aside>The body of the former lighthouse man was found at the seat where I was sitting last night.</line>
+	<line aside>Before a new lighthouse man comes, our friend, Joan, will stay here as a temporary worker for a period of time. So sad——</line>
+	<line aside>Chartlace brought various books with colourful covers but hasn't give them a look since we got here.</line>
+	
+	<line><chara i="001"></chara>Poor man. Suffering from the loneliness for at least three years.</line>
+	
+	<line><chara i="001"></chara>What was your expression the moment you go, I wonder?</line>
+	<line aside>She is fiddling the vestiges left by time with her poker face.</line>
+	<line><chara i="001"></chara>You came and brought nothing, gone but took nothing. What is the meaning of your life eventually?</line>
+	<line><chara i="002"></chara>I don't know, <speed>5</speed>but...</line>
+	<line><chara i="002"></chara><speed>15</speed>The vestiges.</line>
+	<line><chara i="001"></chara>...</line>
+	<line><chara i="002"></chara>They get eternal life as used to contribute to the livings, leaving a memory that will never gone.</line>
+	<line><chara i="001"></chara>You give me a sense that we're the people on the same way sometimes, Vilo.</line>
+	<comment>Both of them are taking out something from the cabinet and put them into their own pockets at the same time, but only Chartlace is illustrated</comment>
+	<line aside>Yeah. That's the secret why life is so wonderful——</line>
+	<line aside>Chartlace, describing herself as a fugitive princess the day when she encountered with me.</line>
+	<line aside>However, no one can give any evidence to proof it, not even herself. There must be something wrong with her.</line>
+	<line><chara i="002"></chara>And... I wonder...</line>
+	<line><chara i="002"></chara>Why have we come so early. It's noon still.</line>
+	<line><chara i="001"></chara>We just came here today only. It takes time to get used to this new environment.</line>
+	<line aside><speed>18</speed>I guess she is right.</line>
+	<line aside>It is also happy that we can be absent from today's work with a good excuse.</line>
+	<line aside>A few hours have passed.</line>
+	<line aside>She just keeps fiddling the things around until supper. After that she starts to read her colourful books.</line>
+	<line aside>In her words, studying is a stepping stone for taking back her throne.</line>
+	<line aside>She's the craziest narcissist I have ever seen.</line>
+	<line><chara i="001"></chara>You see, We have come a long way so far and finally reached here.</line>
+	<line><chara i="001"></chara>It's almost like a blink for the five years that we spent.</line>
+	<line><chara i="001"></chara>It's almost done.</line>
+	<line><chara i="001"></chara>Almost.</line>
+	<line><chara i="002"></chara>I guess I won't be surprised whatever happens next.</line>
+	<line><chara i="001"></chara>How simple it is for me to achieve such a thing. But I was just... like... lack of motivation?</line>
+	<line><chara i="001"></chara>I savor every moment we've spent together. And it will last forever if I don't try to break it on purpose.</line>
+	<line aside>That's exactly what I'm thinking about.</line>
+	<line aside>It would be weird if there isn't a hole on her brain.</line>
+	<line><chara i="002"></chara>I understand. But I'm worried about you more than supporting you. It is meaningless to do such a meaningless thing.</line>
+	<line aside>——It always worked.</line>
+	<line><chara i="001"></chara>Thanks, Vilo.</line>
+	<line><chara i="001"></chara>Though I can't figure out its meaning at the moment, it still remains me a sense that it is my destiny.</line>
+	<line><chara i="001"></chara>You're never going to give me up, will you?</line>
+	<!-- Never gonna give you up (bushi) -->
+	<line><chara i="002"></chara>How could I...</line>
+	<line aside>Annoying woman...</line>
+	<line aside>The sun slowly sets down, as the last ray of scarlet disappears from our faces.</line>
+	<line aside>I light up the lantern we brought, letting the flames sway casually in the air. The light fills up the whole room at once.</line>
+	<line aside>Long silence after that.</line>
+	<line><chara i="001"></chara>I'm always thinking about this after I left the palace. How about giving it up when the hour pointer points at XII?</line>
+	<line><chara i="002"></chara>Are you finally going to give up?</line>
+	<line><chara i="001"></chara>I just don't feel like myself wasting so much time on such an impossible goal.</line>
+	<line><chara i="001"></chara>Ah hah, it's about bedtime now. Lie down and have a good rest.</line>
+	<line><chara i="002"></chara>How kind you are today, Chartlace.</line>
+	<line><chara i="001"></chara>? What are you talking about, you need to work for me tomorrow, don't you?</line>
+	<line><chara i="001"></chara><exp>worriedly</exp>Quadruple work isn't that easy to finish, especially when lacking of rest. It's rude of that man to deduct your salary.</line>
+	<line><chara i="002"></chara>Is it fine after all? I thought you won't be willing to take this job.</line>
+	<line><chara i="001"></chara>Of course, trust me this time.</line>
+	<line><chara i="002"></chara><speed>15</speed>Well... Alright...</line>
+	<line aside>Hahhh——</line>
+	<line aside>I think it's rather to sleep than to refuse, Nobody knows when the next time is after all——</line>
+	<comment>Viloviar falls asleep</comment>
+	<sound>Explosion</sound>
+	<comment>Viloviar wakes up, and turns her head towards Chartlace</comment>
+	<line><chara i="001"></chara><pause>1</pause><speed>20</speed>Vilo.</line>
+	<line><chara i="002"></chara>?</line>
+	<line><chara i="001"></chara><speed>15</speed>I think <speed>10</speed>we've got a big deal tonight.</line>
+</act>
+<script src="app.js"></script>
+</body>

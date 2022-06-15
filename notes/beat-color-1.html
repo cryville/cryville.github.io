@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="/default.css" />
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.loli.net/ajax/libs/mathjax/3.2.1/es5/mml-chtml.min.js"></script>
+<title>Beatline Color Scheme for Rhythm-Related Applications</title>
+<article>
+	<h1>Beatline Color Scheme for Rhythm-Related Applications</h1>
+	<p>This note describes a beatline color scheme for rhythm-related applications. It is automatically calculated by an algorithm to make colors between common beatlines distinguishable, and to make colors of rare beatlines tend to be gray (#888888.) The color of 1/1 beatline is set to red (#ff0000,) while you can change it by modifying the hue offset.</p>
+	<p>The algorithm uses <a href="https://bottosson.github.io/posts/oklab/">Oklch color space</a> to balance the differences of hue and luminance between different colors.</p>
+	<p>Theoretically, colors of all possible beatlines can be calculated with this algorithm. However the calculation of the latter colors depends on the former ones, and the time complexity of the calculation of <math><mn>1</mn><mo>/</mo><mi>n</mi></math> beatline is <math><mi>O</mi><mo>(</mo><mrow><mi>n</mi><mi>log</mi><mi>n</mi></mrow><mo>)</mo></math>, i.e. the time complexity of the calculation of <b>up to</b> <math><mn>1</mn><mo>/</mo><mi>n</mi></math> beatline is <math><mi>O</mi><mo>(</mo><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>log</mi><mi>n</mi></mrow><mo>)</mo></math>. Therefore it is recommended to simply use gray for the beatlines beyond a certain limit.</p>
+	<div style="columns: 16; border: solid 1px gray;">
+		<table style="border-collapse: collapse;">
+			<tbody id="result">
+				<tr>
+					<td>1/1</td>
+					<td id="bl-1" style="width: 2em;"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<p>Below is a preview of beatline rendering. A line width variation is added to make different beatlines more distinguishable.</p>
+	<input type="number" id="nb-num" min="1" value="1" />
+	<canvas style="height: 5em; width: 50%;"></canvas>
+	<p>The algorithm is directly written in this HTML file, you can check it out by using DevTools or downloading this page.</p>
+</article>
+<script>
+	function bs(arr, el, l = 0, r = arr.length - 1) {
+		const m = Math.floor((l + r) / 2);
+		if (el == arr[m]) return m;
+		if (l >= r) return -r - (el > arr[r] ? 1 : 0);
+		return el < arr[m]
+			? bs(arr, el, l, m - 1)
+			: bs(arr, el, m + 1, r);
+	}
+	function gcd(a, b) {
+		if (!b) return a;
+		return gcd(b, a % b);
+	}
+	function oklch_to_oklab(c) {
+		return {
+			l: c.l,
+			a: c.c * Math.cos(c.h / 180 * Math.PI),
+			b: c.c * Math.sin(c.h / 180 * Math.PI),
+		};
+	}
+	function oklab_to_linear_srgb(c) {
+		var l_ = c.l + 0.3963377774 * c.a + 0.2158037573 * c.b;
+		var m_ = c.l - 0.1055613458 * c.a - 0.0638541728 * c.b;
+		var s_ = c.l - 0.0894841775 * c.a - 1.2914855480 * c.b;
+
+		var l = l_ * l_ * l_;
+		var m = m_ * m_ * m_;
+		var s = s_ * s_ * s_;
+
+		return {
+			r: +4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+			g: -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+			b: -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s,
+		};
+	}
+	function linear_srgb_to_srgb(c) {
+		const sf = c => {
+			const abs = Math.abs(c);
+			if (abs > 0.0031308) return (Math.sign(c) || 1) * (1.055 * Math.pow(abs, 1 / 2.4) - 0.055) * 256;
+			return c * 12.92 * 256;
+		};
+		return {
+			r: sf(c.r),
+			g: sf(c.g),
+			b: sf(c.b),
+		};
+	}
+	function oklch_to_srgb(c) {
+		return linear_srgb_to_srgb(oklab_to_linear_srgb(oklch_to_oklab(c)));
+	}
+	function formatRgb(c) {
+		return "rgb(" + c.r + ", " + c.g + ", " + c.b + ")";
+	}
+	var tbl = ["rgb(128, 128, 128)"];
+	var c0 = formatRgb(oklch_to_srgb({ h: 29.233885192342633, c: 0.31321437166460114, l: 0.5981807266228486 }));
+	$("#bl-1").css({
+		"background-color": c0,
+		/* h: 29.233885192342633   ( red in rgb)
+		 * c:  0.31321437166460114 (blue in rgb)
+		 * l:  0.5981807266228486  (gray in rgb)
+		 */
+	});
+	tbl.push(c0);
+	var res = $("#result");
+	var dm = [0, 1];
+	var ds = { 1: [0, 1] };
+	for (var i = 2; i <= 0x100; i++) {
+		var di = i;
+		while (di % 2 == 0) di /= 2;
+		var df = !ds[di];
+		var data = df ? dm : ds[di];
+		var te = 0;
+		var ld = 0;
+		var ldm = 0;
+		for (var j = 1; j < i; j++) {
+			var e = j / i;
+			var k = bs(data, e);
+			if (k >= 0) continue;
+			k = -k;
+			var d = (e - data[k - 1]) * (data[k] - e);
+			var km = bs(dm, e);
+			km = -km;
+			var d2 = (e - dm[km - 1]) * (dm[km] - e);
+			if (d > ld || (d == ld && d2 > ldm)) {
+				te = e;
+				ld = d;
+				ldm = d2;
+			}
+		}
+		data.splice(-bs(data, te), 0, te);
+		if (df) ds[di] = [te - 1, te, te + 1];
+		else dm.splice(-bs(dm, te), 0, te);
+		var lu = 1 / ((di - 1) / Math.E + 1);
+		var c = formatRgb(oklch_to_srgb({ h: te * 360 + 29.233885192342633, c: lu * 0.31321437166460114, l: 0.5981807266228486 }));
+		/*if (di < 2)*/ res.append(
+			$("<tr>")
+				.append($("<td>").text("1/" + i))
+				.append($("<td>").css({
+					"background-color": c,
+				}))
+		);
+		tbl.push(c);
+	}
+
+	var canvas = $("canvas")[0];
+	var w, h;
+	var ctx = canvas.getContext("2d");
+	var nb = $("#nb-num");
+	nb.change(e => {
+		var d = $(e.target).val();
+		ctx.clearRect(0, 0, w, h);
+		for (var i = 0; i <= d; i++) {
+			ctx.beginPath();
+			var x = i / d * w;
+			var ds = d / gcd(i, d);
+			ctx.fillStyle = tbl[ds < tbl.length ? ds : 0];
+			ctx.fillRect(x, 0, 6 / ((ds - 1) / Math.E + 1) + 2, h);
+		}
+	});
+	$(window).resize(e => {
+		w = canvas.width = canvas.clientWidth;
+		h = canvas.height = canvas.clientHeight;
+		w -= 6;
+		nb.change();
+	}).resize();
+</script>
+<footer>Copyright ©️ Cryville 2022</footer>

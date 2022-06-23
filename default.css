@@ -1,11 +1,26 @@
+body {
+	text-size-adjust: none;
+}
 h1 {
-    font-size: 2em;
+	font-size: 2em;
 }
 h2 {
-    font-size: 1.5em;
+	font-size: 1.5em;
 }
 footer {
-    border-block-start: solid 1px gray;
-    font-size: small;
-    text-align: center;
+	border-block-start: solid 1px gray;
+	font-size: small;
+	text-align: center;
+}
+@media (prefers-color-scheme: dark) {
+	body, input {
+		background-color: black;
+		color: white;
+	}
+	a {
+		color: #88f;
+	}
+	a:visited {
+		color: #c4f;
+	}
 }

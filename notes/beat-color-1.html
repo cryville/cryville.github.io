@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
 <link rel="stylesheet" href="/default.css" />
 <script src="https://cdnjs.loli.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.loli.net/ajax/libs/mathjax/3.2.1/es5/mml-chtml.min.js"></script>
@@ -9,7 +10,7 @@
 	<p>This note describes a beatline color scheme for rhythm-related applications. It is automatically calculated by an algorithm to make colors between common beatlines distinguishable, and to make colors of rare beatlines tend to be gray (#888888.) The color of 1/1 beatline is set to red (#ff0000,) while you can change it by modifying the hue offset.</p>
 	<p>The algorithm uses <a href="https://bottosson.github.io/posts/oklab/">Oklch color space</a> to balance the differences of hue and luminance between different colors.</p>
 	<p>Theoretically, colors of all possible beatlines can be calculated with this algorithm. However the calculation of the latter colors depends on the former ones, and the time complexity of the calculation of <math><mn>1</mn><mo>/</mo><mi>n</mi></math> beatline is <math><mi>O</mi><mo>(</mo><mrow><mi>n</mi><mi>log</mi><mi>n</mi></mrow><mo>)</mo></math>, i.e. the time complexity of the calculation of <b>up to</b> <math><mn>1</mn><mo>/</mo><mi>n</mi></math> beatline is <math><mi>O</mi><mo>(</mo><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>log</mi><mi>n</mi></mrow><mo>)</mo></math>. Therefore it is recommended to simply use gray for the beatlines beyond a certain limit.</p>
-	<div style="columns: 16; border: solid 1px gray;">
+	<div id="result-container" style=" border: solid 1px gray;">
 		<table style="border-collapse: collapse;">
 			<tbody id="result">
 				<tr>
@@ -19,6 +20,12 @@
 			</tbody>
 		</table>
 	</div>
+	<style>
+		#result-container { columns: 16; }
+		@media screen and (max-width: 1280px) { #result-container { columns: 8; } }
+		@media screen and (max-width:  640px) { #result-container { columns: 4; } }
+		@media screen and (max-width:  320px) { #result-container { columns: 2; } }
+	</style>
 	<p>Below is a preview of beatline rendering. A line width variation is added to make different beatlines more distinguishable.</p>
 	<input type="number" id="nb-num" min="1" value="1" />
 	<canvas style="height: 5em; width: 50%;"></canvas>

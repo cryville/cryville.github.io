@@ -7,9 +7,19 @@
 <title>Beatline Color Scheme for Rhythm-Related Applications</title>
 <article>
 	<h1>Beatline Color Scheme for Rhythm-Related Applications</h1>
-	<p>This note describes a beatline color scheme for rhythm-related applications. It is automatically calculated by an algorithm to make colors between common beatlines distinguishable, and to make colors of rare beatlines tend to be gray (#888888.) The color of 1/1 beatline is set to red (#ff0000,) while you can change it by modifying the hue offset.</p>
+	<p>This note describes a beatline color scheme for rhythm-related applications. It is automatically calculated by an algorithm to make colors between common beatlines distinguishable, and to make colors of rare beatlines tend to be gray (#888888.) The color of 1/1 beatline is set to a specific color, while you can change it by modifying the hue offset.</p>
 	<p>The algorithm uses <a href="https://bottosson.github.io/posts/oklab/">Oklch color space</a> to balance the differences of hue and luminance between different colors.</p>
 	<p>Theoretically, colors of all possible beatlines can be calculated with this algorithm. However the calculation of the latter colors depends on the former ones, and the time complexity of the calculation of <math><mn>1</mn><mo>/</mo><mi>n</mi></math> beatline is <math><mi>O</mi><mo>(</mo><mrow><mi>n</mi><mi>log</mi><mi>n</mi></mrow><mo>)</mo></math>, i.e. the time complexity of the calculation of <b>up to</b> <math><mn>1</mn><mo>/</mo><mi>n</mi></math> beatline is <math><mi>O</mi><mo>(</mo><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>log</mi><mi>n</mi></mrow><mo>)</mo></math>. Therefore it is recommended to simply use gray for the beatlines beyond a certain limit.</p>
+	<div id="params">
+		<label for="rb-l">Luma</label><input type="range" id="rb-l" min="0" max="1" step="0.001" value="0.5981807266228486" />
+		<label for="rb-c">Max Chroma</label><input type="range" id="rb-c" min="0" max="0.4" step="0.001" value="0.31321437166460114" />
+		<label for="rb-h">Initial Hue</label><input type="range" id="rb-h" min="0" max="360" step="1" value="29.233885192342633" />
+	</div>
+	<!--
+		h: 29.233885192342633   ( red in rgb)
+		c:  0.31321437166460114 (blue in rgb)
+		l:  0.5981807266228486  (gray in rgb)
+	-->
 	<div id="result-container" style=" border: solid 1px gray;">
 		<table style="border-collapse: collapse;">
 			<tbody id="result">
@@ -21,10 +31,27 @@
 		</table>
 	</div>
 	<style>
-		#result-container { columns: 16; }
-		@media screen and (max-width: 1280px) { #result-container { columns: 8; } }
-		@media screen and (max-width:  640px) { #result-container { columns: 4; } }
-		@media screen and (max-width:  320px) { #result-container { columns: 2; } }
+		#result-container {
+			columns: 16;
+		}
+
+		@media screen and (max-width: 1280px) {
+			#result-container {
+				columns: 8;
+			}
+		}
+
+		@media screen and (max-width: 640px) {
+			#result-container {
+				columns: 4;
+			}
+		}
+
+		@media screen and (max-width: 320px) {
+			#result-container {
+				columns: 2;
+			}
+		}
 	</style>
 	<p>Below is a preview of beatline rendering. A line width variation is added to make different beatlines more distinguishable.</p>
 	<input type="number" id="nb-num" min="1" value="1" />
@@ -84,56 +111,60 @@
 	function formatRgb(c) {
 		return "rgb(" + c.r + ", " + c.g + ", " + c.b + ")";
 	}
-	var tbl = ["rgb(128, 128, 128)"];
-	var c0 = formatRgb(oklch_to_srgb({ h: 29.233885192342633, c: 0.31321437166460114, l: 0.5981807266228486 }));
-	$("#bl-1").css({
-		"background-color": c0,
-		/* h: 29.233885192342633   ( red in rgb)
-		 * c:  0.31321437166460114 (blue in rgb)
-		 * l:  0.5981807266228486  (gray in rgb)
-		 */
-	});
-	tbl.push(c0);
-	var res = $("#result");
-	var dm = [0, 1];
-	var ds = { 1: [0, 1] };
-	for (var i = 2; i <= 0x100; i++) {
-		var di = i;
-		while (di % 2 == 0) di /= 2;
-		var df = !ds[di];
-		var data = df ? dm : ds[di];
-		var te = 0;
-		var ld = 0;
-		var ldm = 0;
-		for (var j = 1; j < i; j++) {
-			var e = j / i;
-			var k = bs(data, e);
-			if (k >= 0) continue;
-			k = -k;
-			var d = (e - data[k - 1]) * (data[k] - e);
-			var km = bs(dm, e);
-			km = -km;
-			var d2 = (e - dm[km - 1]) * (dm[km] - e);
-			if (d > ld || (d == ld && d2 > ldm)) {
-				te = e;
-				ld = d;
-				ldm = d2;
+	var tbl;
+    function generateList() {
+        $(".g").remove();
+        tbl = ["rgb(128, 128, 128)"];
+        var l1 = parseFloat($("#rb-l").val());
+        var c1 = parseFloat($("#rb-c").val());
+        var h1 = parseFloat($("#rb-h").val());
+		var c0 = formatRgb(oklch_to_srgb({ h: h1, c: c1, l: l1 }));
+		$("#bl-1").css({
+			"background-color": c0,
+		});
+		tbl.push(c0);
+		var res = $("#result");
+		var dm = [0, 1];
+		var ds = { 1: [0, 1] };
+		for (var i = 2; i <= 0x100; i++) {
+			var di = i;
+			while (di % 2 == 0) di /= 2;
+			var df = !ds[di];
+			var data = df ? dm : ds[di];
+			var te = 0;
+			var ld = 0;
+			var ldm = 0;
+			for (var j = 1; j < i; j++) {
+				var e = j / i;
+				var k = bs(data, e);
+				if (k >= 0) continue;
+				k = -k;
+				var d = (e - data[k - 1]) * (data[k] - e);
+				var km = bs(dm, e);
+				km = -km;
+				var d2 = (e - dm[km - 1]) * (dm[km] - e);
+				if (d > ld || (d == ld && d2 > ldm)) {
+					te = e;
+					ld = d;
+					ldm = d2;
+				}
 			}
+			data.splice(-bs(data, te), 0, te);
+			if (df) ds[di] = [te - 1, te, te + 1];
+			else dm.splice(-bs(dm, te), 0, te);
+			var lu = 1 / ((di - 1) / Math.E + 1);
+			var c = formatRgb(oklch_to_srgb({ h: te * 360 + h1, c: lu * c1, l: l1 }));
+			/*if (di < 2)*/ res.append(
+                $("<tr>").addClass("g")
+					.append($("<td>").text("1/" + i))
+					.append($("<td>").css({
+						"background-color": c,
+					}))
+			);
+			tbl.push(c);
 		}
-		data.splice(-bs(data, te), 0, te);
-		if (df) ds[di] = [te - 1, te, te + 1];
-		else dm.splice(-bs(dm, te), 0, te);
-		var lu = 1 / ((di - 1) / Math.E + 1);
-		var c = formatRgb(oklch_to_srgb({ h: te * 360 + 29.233885192342633, c: lu * 0.31321437166460114, l: 0.5981807266228486 }));
-		/*if (di < 2)*/ res.append(
-			$("<tr>")
-				.append($("<td>").text("1/" + i))
-				.append($("<td>").css({
-					"background-color": c,
-				}))
-		);
-		tbl.push(c);
 	}
+	generateList();
 
 	var canvas = $("canvas")[0];
 	var w, h;
@@ -150,6 +181,10 @@
 			ctx.fillRect(x, 0, 6 / ((ds - 1) / Math.E + 1) + 2, h);
 		}
 	});
+	$("#params").children("input").change(e => {
+		generateList();
+		nb.change();
+    });
 	$(window).resize(e => {
 		w = canvas.width = canvas.clientWidth;
 		h = canvas.height = canvas.clientHeight;

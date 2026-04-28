@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en-Latn-US">
+<head>
+	<meta charset="utf-8" />
+	<title>Proposal of an Improved Degree Expression</title>
+	<meta name="color-scheme" content="light dark" />
+	<style>
+		@font-face {
+			font-family: Qoz;
+			src: url("/fonts/Qoz-ascii-Regular.otf") format("opentype");
+		}
+		body {
+			max-width: 960px;
+		}
+		h1, h2, h3 {
+			clear: both;
+		}
+		h3 {
+			counter-increment: h3;
+		}
+		h3::before {
+			content: counter(h3) ". ";
+		}
+		table {
+			border-collapse: collapse;
+		}
+		th, td {
+			border: solid 1px;
+			padding: 0 0.2rem;
+		}
+		table.reference-table {
+			text-align: center;
+			margin: 1em 0;
+			td {
+				padding: .2em;
+			}
+			i {
+				display: block;
+			}
+		}
+		table.cjk {
+			float: right;
+			margin: 0 .5em;
+		}
+		dfn {
+			font-style: italic;
+		}
+		.qoz {
+			font-family: Qoz;
+			font-style: normal;
+		}
+	</style>
+</head>
+<body>
+	<h1>Proposal of an Improved Degree Expression</h1>
+	<p>Note: There are some new definitions (written in italics) in this proposal. They only apply to this proposal and should not be referred to as terms in Shasavic music theory.</p>
+	<p>For a CJK-style notation, please refer to the <a href="degree-rev.html">Chinese version</a> of this proposal.</p>
+	<h2>Rules</h2>
+	<h3>P1</h3>
+	<p>The interval of 0 difference is notated as P1, in which the number “1” is called a <dfn>degree number</dfn>, and the letter “P” is called a dimension-polar name.</p>
+	<blockquote><i class="qoz">0</i> = P1</blockquote>
+	<h3>2D Accumulation</h3>
+	<p>When accumulating an interval of the frequency ratio 3/2, move the degree number left (accumulating downward) or right (accumulating upward) by one item in the following cycling sequence.</p>
+	<blockquote>…, 3, 7, 4, 1, 5, 2, 6, 3, 7, 4, 1, …</blockquote>
+	<p>Let the <dfn>cycle index</dfn> of P1 be 0. For each time accumulating the aforementioned 2D interval, increment the cycle index by 1 if the degree number moves up from 7 to 4, and decrement the cycle index by 1 if the degree number moves down from 4 to 7. The cycle index stays unchanged otherwise.</p>
+	<p>When the cycle index is not 0, prepend an <dfn>accidental prefix</dfn> to the degree number. A positive cycle index n is notated as a prefix “♯<sup>n</sup>”; a negative cycle index n is notated as a prefix “♭<sup>n</sup>”.</p>
+	<p>“♯<sup>1</sup>” can be simplified to “♯”, and “♯<sup>2</sup>” to “𝄪”. “♭<sup>1</sup>” can be simplified to “♭”, and “♭<sup>2</sup>” to “𝄫”。</p>
+	<p>The rules above make the following sequence.</p>
+	<blockquote>…, 𝄫7, ♭4, …, ♭7, 4, 1, 5, 2, 6, 3, 7, ♯4, …, ♯7, 𝄪4, …</blockquote>
+	<p>Every item in the sequence is a <dfn>degree</dfn>, consisting a degree number and an optional accidental prefix. This sequence is referred to as the <dfn>degree sequence</dfn>.</p>
+	<blockquote><ul>
+		<li>(3/2)<sup>-23</sup> = P♭<sup>4</sup>7</li>
+		<li>(3/2)<sup>-16</sup> = P♭<sup>3</sup>7</li>
+		<li>(3/2)<sup>-9</sup> = P𝄫7</li>
+		<li>(3/2)<sup>-8</sup> = P♭4</li>
+		<li><i class="qoz">2ddd</i> = P♭3</li>
+		<li><i class="qoz">2dd</i> = P♭7</li>
+		<li><i class="qoz">2d</i> = P4</li>
+		<li><i class="qoz">0</i> = P1</li>
+		<li><i class="qoz">2u</i> = P5</li>
+		<li><i class="qoz">2uu</i> = P2</li>
+		<li><i class="qoz">2uuu</i> = P6</li>
+		<li><i class="qoz">2uuuu</i> = P3</li>
+		<li><i class="qoz">2uuuuu</i> = P7</li>
+		<li><i class="qoz">2uuuuuu</i> = P♯4</li>
+		<li><i class="qoz">2uuuuuuu</i> = P♯1</li>
+		<li>(3/2)<sup>12</sup> = P♯7</li>
+		<li>(3/2)<sup>13</sup> = P𝄪4</li>
+		<li>(3/2)<sup>20</sup> = P♯<sup>3</sup>4</li>
+		<li>(3/2)<sup>27</sup> = P♯<sup>4</sup>4</li>
+	</ul></blockquote>
+	<h3>Single N-D Accumulation (N≥3)</h3>
+	<p>When accumulating intervals of 3D or higher dimension, change the dimension-polar name based on the dimension and the accumulating direction.</p>
+	<table>
+		<caption>Dimension-Polar Names</caption>
+		<thead>
+			<tr><th>Direction</th><th><i class="qoz">3u</i></th><th><i class="qoz">4u</i></th><th><i class="qoz">5u</i></th><th><i class="qoz">6u</i></th><th><i class="qoz">3d4u</i></th></tr>
+		</thead>
+		<tbody>
+			<tr><td><i class="qoz">u</i></td><td>F</td><td>D</td><td>C</td><td>?</td><td>?</td></tr>
+			<tr><td><i class="qoz">d</i></td><td>T</td><td>S</td><td>V</td><td>?</td><td>?</td></tr>
+		</tbody>
+	</table>
+	<p>When accumulating one such interval, change the degree based on its logarithmic value according to the following table.</p>
+	<table>
+		<caption>Degree for Single N-D Accumulation</caption>
+		<thead>
+			<tr><th>Log. value</th><th>Degree</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>0.0~0.5</td><td>1</td></tr>
+			<tr><td>0.5~1.5</td><td>♭2</td></tr>
+			<tr><td>1.5~2.5</td><td>2</td></tr>
+			<tr><td>2.5~3.5</td><td>♭3</td></tr>
+			<tr><td>3.5~4.5</td><td>3</td></tr>
+			<tr><td>4.5~5.5</td><td>4</td></tr>
+			<tr><td>5.5~6.0</td><td>♯4</td></tr>
+			<tr><td>6.0~6.5</td><td>♭5</td></tr>
+			<tr><td>6.5~7.5</td><td>5</td></tr>
+			<tr><td>7.5~8.5</td><td>♭6</td></tr>
+			<tr><td>8.5~9.5</td><td>6</td></tr>
+			<tr><td>9.5~10.5</td><td>♭7</td></tr>
+			<tr><td>10.5~11.5</td><td>7</td></tr>
+			<tr><td>11.5~12.0</td><td>1</td></tr>
+		</tbody>
+	</table>
+	<p>The logarithmic value <math><mi>l</mi></math> of an interval of the frequency ratio <math><mi>r</mi></math> is defined as <math><mi>l</mi><mo>=</mo><mrow><mn>12</mn><mo>⋅</mo><mo>(</mo><mrow><msub><mi>log</mi><mn>2</mn></msub><mi>r</mi><mo>mod</mo><mn>1</mn></mrow><mo>)</mo></mrow></math>.</p>
+	<p>Here <math><mi>a</mi><mo>mod</mo><mi>d</mi></math> is defined as <math><mi>a</mi><mo>-</mo><mi>d</mi><mo>⋅</mo><mi>floor</mi><mo>(</mo><mrow><mfrac><mi>a</mi><mi>d</mi></mfrac></mrow><mo>)</mo></math>.</p>
+	<blockquote><ul>
+		<li><i class="qoz">3u</i> = F3</li>
+		<li><i class="qoz">3d</i> = T♭6</li>
+		<li><i class="qoz">4u</i> = D♭7</li>
+		<li><i class="qoz">4d</i> = S2</li>
+		<li><i class="qoz">5u</i> = C♯4</li>
+		<li><i class="qoz">5d</i> = V♭5</li>
+		<li><i class="qoz">6u</i> = ?</li>
+		<li><i class="qoz">6d</i> = ?</li>
+		<li><i class="qoz">3d4u</i> = ?</li>
+		<li><i class="qoz">3u4d</i> = ?</li>
+	</ul></blockquote>
+	<h3>Multiple N-D Accumulation (N≥3)</h3>
+	<p>The degree expression in this proposal, as the stratal expression, only supports intervals with multiple accumulations of a same N-D interval, but not those of two different N-D intervals.</p>
+	<p>When accumulating the same N-D intervals again, move the degree by the same distance between 1 and the degree of the single N-D interval in the degree sequence.</p>
+	<p>Let the <dfn>guest multiplier</dfn> of P1 be 0. For each time accumulating an N-D interval, increment the guest multiplier by 1 when accumulating upwards, and decrement the guest multiplier by 1 when accumulating downwards.</p>
+	<p>When the absolute value of the guest multiplier is greater than 1, append a <dfn>multipler suffix</dfn> to the dimension-polar name. An absolute value n is notated as a suffix “<sup>n</sup>”。</p>
+	<p>It's also doable to double the dimension-polar name for the value 2 instead of writing the suffix.</p>
+	<blockquote><ul>
+		<li><i class="qoz">3uu</i> = FF♯5</li>
+		<li><i class="qoz">3dd</i> = TT♭4</li>
+		<li><i class="qoz">3uuu</i> = F<sup>3</sup>♯7</li>
+		<li><i class="qoz">3ddd</i> = T<sup>3</sup>𝄫2</li>
+		<li><i class="qoz">4uu</i> = DD♭6</li>
+		<li><i class="qoz">4dd</i> = SS3</li>
+		<li><i class="qoz">5uu</i> = CC♯7</li>
+		<li><i class="qoz">5dd</i> = VV𝄫2</li>
+		<li><i class="qoz">6uu</i> = ?</li>
+		<li><i class="qoz">6dd</i> = ?</li>
+		<li><i class="qoz">3dd4uu</i> = ?</li>
+		<li><i class="qoz">3uu4dd</i> = ?</li>
+	</ul></blockquote>
+	<h2>Reference Table</h2>
+	<table class="reference-table"><tbody>
+		<tr>
+			<td><i class="qoz">2ddd3uuu</i>F<sup>3</sup>♯2</td>
+			<td><i class="qoz">2dd3uuu</i>F<sup>3</sup>♯6</td>
+			<td><i class="qoz">2d3uuu</i>F<sup>3</sup>♯3</td>
+			<td><i class="qoz">3uuu</i>F<sup>3</sup>♯7</td>
+			<td><i class="qoz">2u3uuu</i>F<sup>3</sup>𝄪4</td>
+			<td><i class="qoz">2uu3uuu</i>F<sup>3</sup>𝄪1</td>
+			<td><i class="qoz">2uuu3uuu</i>F<sup>3</sup>𝄪5</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd3uu</i>FF7</td>
+			<td><i class="qoz">2dd3uu</i>FF♯4</td>
+			<td><i class="qoz">2d3uu</i>FF♯1</td>
+			<td><i class="qoz">3uu</i>FF♯5</td>
+			<td><i class="qoz">2u3uu</i>FF♯2</td>
+			<td><i class="qoz">2uu3uu</i>FF♯6</td>
+			<td><i class="qoz">2uuu3uu</i>FF♯3</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd3u</i>F5</td>
+			<td><i class="qoz">2dd3u</i>F2</td>
+			<td><i class="qoz">2d3u</i>F6</td>
+			<td><i class="qoz">3u</i>F3</td>
+			<td><i class="qoz">2u3u</i>F7</td>
+			<td><i class="qoz">2uu3u</i>F♯4</td>
+			<td><i class="qoz">2uuu3u</i>F♯1</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd</i>P♭3</td>
+			<td><i class="qoz">2dd</i>P♭7</td>
+			<td><i class="qoz">2d</i>P4</td>
+			<td><i class="qoz">0</i>P1</td>
+			<td><i class="qoz">2u</i>P5</td>
+			<td><i class="qoz">2uu</i>P2</td>
+			<td><i class="qoz">2uuu</i>P6</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd3d</i>T♭1</td>
+			<td><i class="qoz">2dd3d</i>T♭5</td>
+			<td><i class="qoz">2d3d</i>T♭2</td>
+			<td><i class="qoz">3d</i>T♭6</td>
+			<td><i class="qoz">2u3d</i>T♭3</td>
+			<td><i class="qoz">2uu3d</i>T♭7</td>
+			<td><i class="qoz">2uuu3d</i>T4</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd3dd</i>TT𝄫6</td>
+			<td><i class="qoz">2dd3dd</i>TT𝄫3</td>
+			<td><i class="qoz">2d3dd</i>TT𝄫7</td>
+			<td><i class="qoz">3dd</i>TT♭4</td>
+			<td><i class="qoz">2u3dd</i>TT♭1</td>
+			<td><i class="qoz">2uu3dd</i>TT♭5</td>
+			<td><i class="qoz">2uuu3dd</i>TT♭2</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd3ddd</i>T<sup>3</sup>𝄫4</td>
+			<td><i class="qoz">2dd3ddd</i>T<sup>3</sup>𝄫1</td>
+			<td><i class="qoz">2d3ddd</i>T<sup>3</sup>𝄫5</td>
+			<td><i class="qoz">3ddd</i>T<sup>3</sup>𝄫2</td>
+			<td><i class="qoz">2u3ddd</i>T<sup>3</sup>𝄫6</td>
+			<td><i class="qoz">2uu3ddd</i>T<sup>3</sup>𝄫3</td>
+			<td><i class="qoz">2uuu3ddd</i>T<sup>3</sup>𝄫7</td>
+		</tr>
+	</tbody></table>
+	<table class="reference-table"><tbody>
+		<tr>
+			<td><i class="qoz">2ddd4uuu</i>D<sup>3</sup>𝄫7</td>
+			<td><i class="qoz">2dd4uuu</i>D<sup>3</sup>♭4</td>
+			<td><i class="qoz">2d4uuu</i>D<sup>3</sup>♭1</td>
+			<td><i class="qoz">4uuu</i>D<sup>3</sup>♭5</td>
+			<td><i class="qoz">2u4uuu</i>D<sup>3</sup>♭2</td>
+			<td><i class="qoz">2uu4uuu</i>D<sup>3</sup>♭6</td>
+			<td><i class="qoz">2uuu4uuu</i>D<sup>3</sup>♭3</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd4uu</i>DD♭1</td>
+			<td><i class="qoz">2dd4uu</i>DD♭5</td>
+			<td><i class="qoz">2d4uu</i>DD♭2</td>
+			<td><i class="qoz">4uu</i>DD♭6</td>
+			<td><i class="qoz">2u4uu</i>DD♭3</td>
+			<td><i class="qoz">2uu4uu</i>DD♭7</td>
+			<td><i class="qoz">2uuu4uu</i>DD4</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd4u</i>D♭2</td>
+			<td><i class="qoz">2dd4u</i>D♭6</td>
+			<td><i class="qoz">2d4u</i>D♭3</td>
+			<td><i class="qoz">4u</i>D♭7</td>
+			<td><i class="qoz">2u4u</i>D4</td>
+			<td><i class="qoz">2uu4u</i>D1</td>
+			<td><i class="qoz">2uuu4u</i>D5</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd</i>P♭3</td>
+			<td><i class="qoz">2dd</i>P♭7</td>
+			<td><i class="qoz">2d</i>P4</td>
+			<td><i class="qoz">0</i>P1</td>
+			<td><i class="qoz">2u</i>P5</td>
+			<td><i class="qoz">2uu</i>P2</td>
+			<td><i class="qoz">2uuu</i>P6</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd4d</i>S4</td>
+			<td><i class="qoz">2dd4d</i>S1</td>
+			<td><i class="qoz">2d4d</i>S5</td>
+			<td><i class="qoz">4d</i>S2</td>
+			<td><i class="qoz">2u4d</i>S6</td>
+			<td><i class="qoz">2uu4d</i>S3</td>
+			<td><i class="qoz">2uuu4d</i>S7</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd4dd</i>SS5</td>
+			<td><i class="qoz">2dd4dd</i>SS2</td>
+			<td><i class="qoz">2d4dd</i>SS6</td>
+			<td><i class="qoz">4dd</i>SS3</td>
+			<td><i class="qoz">2u4dd</i>SS7</td>
+			<td><i class="qoz">2uu4dd</i>SS♯4</td>
+			<td><i class="qoz">2uuu4dd</i>SS♯1</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd4ddd</i>S<sup>3</sup> 6</td>
+			<td><i class="qoz">2dd4ddd</i>S<sup>3</sup> 3</td>
+			<td><i class="qoz">2d4ddd</i>S<sup>3</sup> 7</td>
+			<td><i class="qoz">4ddd</i>S<sup>3</sup>♯4</td>
+			<td><i class="qoz">2u4ddd</i>S<sup>3</sup>♯1</td>
+			<td><i class="qoz">2uu4ddd</i>S<sup>3</sup>♯5</td>
+			<td><i class="qoz">2uuu4ddd</i>S<sup>3</sup>♯2</td>
+		</tr>
+	</tbody></table>
+	<table class="reference-table"><tbody>
+		<tr>
+			<td><i class="qoz">2ddd5uuu</i>C<sup>3</sup>𝄪5</td>
+			<td><i class="qoz">2dd5uuu</i>C<sup>3</sup>𝄪2</td>
+			<td><i class="qoz">2d5uuu</i>C<sup>3</sup>𝄪6</td>
+			<td><i class="qoz">5uuu</i>C<sup>3</sup>𝄪3</td>
+			<td><i class="qoz">2u5uuu</i>C<sup>3</sup>𝄪7</td>
+			<td><i class="qoz">2uu5uuu</i>C<sup>3</sup>♯<sup>3</sup>4</td>
+			<td><i class="qoz">2uuu5uuu</i>C<sup>3</sup>♯<sup>3</sup>1</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd5uu</i>CC♯2</td>
+			<td><i class="qoz">2dd5uu</i>CC♯6</td>
+			<td><i class="qoz">2d5uu</i>CC♯3</td>
+			<td><i class="qoz">5uu</i>CC♯7</td>
+			<td><i class="qoz">2u5uu</i>CC𝄪4</td>
+			<td><i class="qoz">2uu5uu</i>CC𝄪1</td>
+			<td><i class="qoz">2uuu5uu</i>CC𝄪5</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd5u</i>C6</td>
+			<td><i class="qoz">2dd5u</i>C3</td>
+			<td><i class="qoz">2d5u</i>C7</td>
+			<td><i class="qoz">5u</i>C♯4</td>
+			<td><i class="qoz">2u5u</i>C♯1</td>
+			<td><i class="qoz">2uu5u</i>C♯5</td>
+			<td><i class="qoz">2uuu5u</i>C♯2</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd</i>P♭3</td>
+			<td><i class="qoz">2dd</i>P♭7</td>
+			<td><i class="qoz">2d</i>P4</td>
+			<td><i class="qoz">0</i>P1</td>
+			<td><i class="qoz">2u</i>P5</td>
+			<td><i class="qoz">2uu</i>P2</td>
+			<td><i class="qoz">2uuu</i>P6</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd5d</i>V𝄫7</td>
+			<td><i class="qoz">2dd5d</i>V♭4</td>
+			<td><i class="qoz">2d5d</i>V♭1</td>
+			<td><i class="qoz">5d</i>V♭5</td>
+			<td><i class="qoz">2u5d</i>V♭2</td>
+			<td><i class="qoz">2uu5d</i>V♭6</td>
+			<td><i class="qoz">2uuu5d</i>V♭3</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd5dd</i>VV𝄫4</td>
+			<td><i class="qoz">2dd5dd</i>VV𝄫1</td>
+			<td><i class="qoz">2d5dd</i>VV𝄫5</td>
+			<td><i class="qoz">5dd</i>VV𝄫2</td>
+			<td><i class="qoz">2u5dd</i>VV𝄫6</td>
+			<td><i class="qoz">2uu5dd</i>VV𝄫3</td>
+			<td><i class="qoz">2uuu5dd</i>VV𝄫7</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd5ddd</i>V<sup>3</sup>♭<sup>3</sup>1</td>
+			<td><i class="qoz">2dd5ddd</i>V<sup>3</sup>♭<sup>3</sup>5</td>
+			<td><i class="qoz">2d5ddd</i>V<sup>3</sup>♭<sup>3</sup>2</td>
+			<td><i class="qoz">5ddd</i>V<sup>3</sup>♭<sup>3</sup>6</td>
+			<td><i class="qoz">2u5ddd</i>V<sup>3</sup>♭<sup>3</sup>3</td>
+			<td><i class="qoz">2uu5ddd</i>V<sup>3</sup>♭<sup>3</sup>7</td>
+			<td><i class="qoz">2uuu5ddd</i>V<sup>3</sup>𝄫4</td>
+		</tr>
+	</tbody></table>
+</body>
+</html>

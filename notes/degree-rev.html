@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>关于改良音级表现的提案</title>
+	<meta name="color-scheme" content="light dark" />
+	<style>
+		@font-face {
+			font-family: Qoz;
+			src: url("/fonts/Qoz-ascii-Regular.otf") format("opentype");
+		}
+		body {
+			max-width: 960px;
+		}
+		h1, h2, h3 {
+			clear: both;
+		}
+		h3 {
+			counter-increment: h3;
+		}
+		h3::before {
+			content: counter(h3) ". ";
+		}
+		table {
+			border-collapse: collapse;
+		}
+		th, td {
+			border: solid 1px;
+			padding: 0 0.2rem;
+		}
+		table.reference-table {
+			text-align: center;
+			margin: 1em 0;
+			td {
+				padding: .2em;
+			}
+			i {
+				display: block;
+			}
+		}
+		table.cjk {
+			float: right;
+			margin: 0 .5em;
+		}
+		dfn {
+			font-style: normal;
+			text-decoration: underline dashed;
+		}
+		.qoz {
+			font-family: Qoz;
+			font-style: normal;
+		}
+	</style>
+</head>
+<body>
+	<h1>关于改良音级表现的提案</h1>
+	<p>注：本提案中出现的一些新定义（以虚下划线标注），仅适用于本文中的说明，不是沙式乐理的名词。</p>
+	<p lang="en">For an English-style notation, please refer to the <a href="degree-rev-en.html">English version</a> of this proposal.</p>
+	<h2>规则</h2>
+	<h3>纯 1 级</h3>
+	<table class="cjk">
+		<caption lang="en">“perfect”</caption>
+		<tbody>
+			<tr><td>简</td><td>纯</td></tr>
+			<tr><td>繁</td><td lang="zh-Hant">純</td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>完全<rt>かんぜん</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<table class="cjk">
+		<caption lang="en">“degree number”</caption>
+		<tbody>
+			<tr><td>简</td><td>级数</td></tr>
+			<tr><td>繁</td><td lang="zh-Hant">級數</td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>度数<rt>どすう</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<table class="cjk">
+		<caption lang="en">“dimension-polar name”</caption>
+		<tbody>
+			<tr><td>简</td><td>维度阴阳名</td></tr>
+			<tr><td>繁</td><td lang="zh-Hant">維度陰陽名</td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>次元陰陽名<rt>じげんいんようめい</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<p>差为零的音高差为纯 1 级。其中的数字“1”称为<dfn>级数</dfn>，“纯”称为维度阴阳名。</p>
+	<blockquote><i class="qoz">0</i> = 纯 1 级</blockquote>
+	<h3>二维堆积</h3>
+	<table class="cjk">
+		<caption lang="en">“frequency ratio”</caption>
+		<tbody>
+			<tr><td>简</td><td>频率比</td></tr>
+			<tr><td>繁</td><td lang="zh-Hant">頻率比</td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>周波数比<rt>しゅうはすうひ</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<table class="cjk">
+		<caption lang="en">“dimension”</caption>
+		<tbody>
+			<tr><td>简</td><td>维度 / 维</td></tr>
+			<tr><td>繁</td><td lang="zh-Hant">維度 / 維</td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>次元<rt>じげん</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<p>堆积频率比为 3/2 的二维音高差时，将级数按如下循环数列移动一位，向上堆积时向右移动，向下堆积时向左移动。</p>
+	<blockquote>…, 3, 7, 4, 1, 5, 2, 6, 3, 7, 4, 1, …</blockquote>
+	<p>规定纯 1 级的<dfn>重数</dfn>为 0。每次堆积二维音高差时，若级数从 7 向上移动至 4，则重数加 1；级数从 4 向下移动至 7，则重数减 1；其余情况重数不变。</p>
+	<table class="cjk">
+		<caption lang="en">“sharp”</caption>
+		<tbody>
+			<tr><td>简</td><td>升</td></tr>
+			<tr><td>繁</td><td lang="zh-Hant">升</td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>嬰<rt>えい</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<table class="cjk">
+		<caption lang="en">“flat”</caption>
+		<tbody>
+			<tr><td>简</td><td>降</td></tr>
+			<tr><td>繁</td><td lang="zh-Hant">降</td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>変<rt>へん</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<p>重数不为 0 时，需要在级数前加上<dfn>重数前缀</dfn>。重数为正数 n 时，前缀为“n 重升”；重数为负数时，前缀为“n 重降”。</p>
+	<p>“一重升”可简写为“升”，“二重升”可简写为“重升”。“一重降”可简写为“降”，“二重降”可简写为“重降”。</p>
+	<p>上述规则形成如下的序列。</p>
+	<blockquote>…, 重降 7, 降 4, …, 降 7, 4, 1, 5, 2, 6, 3, 7, 升 4, …, 升 7, 重升 4, …</blockquote>
+	<table class="cjk">
+		<caption lang="en">“degree”</caption>
+		<tbody>
+			<tr><td>简</td><td>音级</td></tr>
+			<tr><td>繁</td><td lang="zh-Hant">音級</td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>音度<rt>おんど</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<p>序列中的每一项由重数前缀加级数组成，称为<dfn>音级</dfn>。将此序列称为<dfn>音级序列</dfn>。</p>
+	<blockquote><ul>
+		<li>(3/2)<sup>-23</sup> = 纯四重降 7 级</li>
+		<li>(3/2)<sup>-16</sup> = 纯三重降 7 级</li>
+		<li>(3/2)<sup>-9</sup> = 纯重降 7 级</li>
+		<li>(3/2)<sup>-8</sup> = 纯降 4 级</li>
+		<li><i class="qoz">2ddd</i> = 纯降 3 级</li>
+		<li><i class="qoz">2dd</i> = 纯降 7 级</li>
+		<li><i class="qoz">2d</i> = 纯 4 级</li>
+		<li><i class="qoz">0</i> = 纯 1 级</li>
+		<li><i class="qoz">2u</i> = 纯 5 级</li>
+		<li><i class="qoz">2uu</i> = 纯 2 级</li>
+		<li><i class="qoz">2uuu</i> = 纯 6 级</li>
+		<li><i class="qoz">2uuuu</i> = 纯 3 级</li>
+		<li><i class="qoz">2uuuuu</i> = 纯 7 级</li>
+		<li><i class="qoz">2uuuuuu</i> = 纯升 4 级</li>
+		<li><i class="qoz">2uuuuuuu</i> = 纯升 1 级</li>
+		<li>(3/2)<sup>12</sup> = 纯升 7 级</li>
+		<li>(3/2)<sup>13</sup> = 纯重升 4 级</li>
+		<li>(3/2)<sup>20</sup> = 纯三重升 4 级</li>
+		<li>(3/2)<sup>27</sup> = 纯四重升 4 级</li>
+	</ul></blockquote>
+	<h3>单次高维堆积</h3>
+	<p>堆积三维或以上的高维音高差时，将维度阴阳名改为由维度和堆积方向决定的维度阴阳名。</p>
+	<table class="cjk">
+		<caption lang="en">“felix”</caption>
+		<tbody>
+			<tr><td>简</td><td><ruby>乐<rt>lè</rt></ruby></td></tr>
+			<tr><td>繁</td><td lang="zh-Hant"><ruby>樂<rt>ㄌㄜˋ</rt></ruby></td></tr>
+			<tr><td>粤</td><td lang="yue-Hant"><ruby>樂<rt>lok6</rt></ruby></td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>楽<rt>らく</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<table class="cjk">
+		<caption lang="en">“sparse”</caption>
+		<tbody>
+			<tr><td>简</td><td><ruby>薄<rt>bó</rt></ruby> / <ruby>薄<rt>báo</rt></ruby></td></tr>
+			<tr><td>繁</td><td lang="zh-Hant"><ruby>薄<rt>ㄅㄛˊ</rt></ruby> / <ruby>薄<rt>ㄅㄠˊ</rt></ruby></td></tr>
+			<tr><td>粤</td><td lang="yue-Hant"><ruby>薄<rt>bok6</rt></ruby></td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>薄<rt>はく</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<table class="cjk">
+		<caption lang="en">“ceed”</caption>
+		<tbody>
+			<tr><td>简</td><td><ruby>发<rt>fā</rt></ruby></td></tr>
+			<tr><td>繁</td><td lang="zh-Hant"><ruby>發<rt>ㄈㄚ</rt></ruby></td></tr>
+			<tr><td>粤</td><td lang="yue-Hant"><ruby>發<rt>faak3</rt></ruby></td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>発<rt>はつ</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<table class="cjk">
+		<caption lang="en">“vene”</caption>
+		<tbody>
+			<tr><td>简</td><td><ruby>着<rt>zhuó</rt></ruby></td></tr>
+			<tr><td>繁</td><td lang="zh-Hant"><ruby>著<rt>ㄓㄨㄛˊ</rt> / <ruby>着<rt>ㄓㄨㄛˊ</rt></ruby></td></tr>
+			<tr><td>粤</td><td lang="yue-Hant"><ruby>著<rt>zoek6</rt> / <ruby>着<rt>zoek6</rt></ruby></td></tr>
+			<tr><td>日</td><td lang="ja"><ruby>着<rt>ちゃく</rt></ruby></td></tr>
+		</tbody>
+	</table>
+	<table>
+		<caption>维度阴阳名</caption>
+		<thead>
+			<tr><th>方向</th><th><i class="qoz">3u</i></th><th><i class="qoz">4u</i></th><th><i class="qoz">5u</i></th><th><i class="qoz">6u</i></th><th><i class="qoz">3d4u</i></th></tr>
+		</thead>
+		<tbody>
+			<tr><td><i class="qoz">u</i></td><td>乐</td><td>厚</td><td>发</td><td>叮</td><td>仰</td></tr>
+			<tr><td><i class="qoz">d</i></td><td>哀</td><td>薄</td><td>着</td><td>当</td><td>伏</td></tr>
+		</tbody>
+	</table>
+	<p>堆积一个上述音高差时，根据其对数值，将音级改为下表对应的音级。</p>
+	<table>
+		<caption>单次高维堆积音级</caption>
+		<thead>
+			<tr><th>对数值</th><th>音级</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>0.0~0.5</td><td>1</td></tr>
+			<tr><td>0.5~1.5</td><td>降 2</td></tr>
+			<tr><td>1.5~2.5</td><td>2</td></tr>
+			<tr><td>2.5~3.5</td><td>降 3</td></tr>
+			<tr><td>3.5~4.5</td><td>3</td></tr>
+			<tr><td>4.5~5.5</td><td>4</td></tr>
+			<tr><td>5.5~6.0</td><td>升 4</td></tr>
+			<tr><td>6.0~6.5</td><td>降 5</td></tr>
+			<tr><td>6.5~7.5</td><td>5</td></tr>
+			<tr><td>7.5~8.5</td><td>降 6</td></tr>
+			<tr><td>8.5~9.5</td><td>6</td></tr>
+			<tr><td>9.5~10.5</td><td>降 7</td></tr>
+			<tr><td>10.5~11.5</td><td>7</td></tr>
+			<tr><td>11.5~12.0</td><td>1</td></tr>
+		</tbody>
+	</table>
+	<p>其中，一个音高差的对数值 <math><mi>l</mi></math> 等于其频率比 <math><mi>r</mi></math> 以 2 为底的对数除以 1 的余数乘以 12 的值，即 <math><mi>l</mi><mo>=</mo><mrow><mn>12</mn><mo>⋅</mo><mo>(</mo><mrow><msub><mi>log</mi><mn>2</mn></msub><mi>r</mi><mo>mod</mo><mn>1</mn></mrow><mo>)</mo></mrow></math>。</p>
+	<p>此处，<math><mi>a</mi></math> 除以 <math><mi>d</mi></math> 的余数 <math><mi>a</mi><mo>mod</mo><mi>d</mi></math> 定义为 <math><mi>a</mi><mo>-</mo><mi>d</mi><mo>⋅</mo><mi>floor</mi><mo>(</mo><mrow><mfrac><mi>a</mi><mi>d</mi></mfrac></mrow><mo>)</mo></math>。</p>
+	<blockquote><ul>
+		<li><i class="qoz">3u</i> = 乐 3 级</li>
+		<li><i class="qoz">3d</i> = 哀降 6 级</li>
+		<li><i class="qoz">4u</i> = 厚降 7 级</li>
+		<li><i class="qoz">4d</i> = 薄 2 级</li>
+		<li><i class="qoz">5u</i> = 发升 4 级</li>
+		<li><i class="qoz">5d</i> = 着降 5 级</li>
+		<li><i class="qoz">6u</i> = 叮降 6 级</li>
+		<li><i class="qoz">6d</i> = 当 3 级</li>
+		<li><i class="qoz">3d4u</i> = 仰升 4 级</li>
+		<li><i class="qoz">3u4d</i> = 伏降 5 级</li>
+	</ul></blockquote>
+	<h3>多次高维堆积</h3>
+	<p>本提案的音级表现与音层表现一样，只支持表示单次或多次堆积同一个高维音高差的音高差，不支持表示堆积了两个不同的高维音高差的音高差。</p>
+	<p>堆积多次高维音高差时，将音级按音级序列移动特定的位数。这个特定的位数等于单次堆积的音高差的音级和 1 之间的位数。</p>
+	<p>规定纯 1 级的<dfn>高维重数</dfn>为 0。每次堆积高维音高差时，向上堆积时高维重数加 1，向下堆积时高维重数减 1。</p>
+	<p>高维重数的绝对值大于 1 时，需要在维度阴阳名前加上<dfn>高维重数前缀</dfn>。高维重数的绝对值 n 对应的前缀为“n 重”。</p>
+	<p>“二重”可简写为“重”。</p>
+	<blockquote><ul>
+		<li><i class="qoz">3uu</i> = 重乐升 5 级</li>
+		<li><i class="qoz">3dd</i> = 重哀降 4 级</li>
+		<li><i class="qoz">3uuu</i> = 三重乐升 7 级</li>
+		<li><i class="qoz">3ddd</i> = 三重哀重降 2 级</li>
+		<li><i class="qoz">4uu</i> = 重厚降 6 级</li>
+		<li><i class="qoz">4dd</i> = 重薄 3 级</li>
+		<li><i class="qoz">5uu</i> = 重发升 7 级</li>
+		<li><i class="qoz">5dd</i> = 重着重降 2 级</li>
+		<li><i class="qoz">6uu</i> = 重叮降 4 级</li>
+		<li><i class="qoz">6dd</i> = 重当升 5 级</li>
+		<li><i class="qoz">3dd4uu</i> = 重仰重升 7 级</li>
+		<li><i class="qoz">3uu4dd</i> = 重伏重降 2 级</li>
+	</ul></blockquote>
+	<h2>对照表</h2>
+	<table class="reference-table"><tbody>
+		<tr>
+			<td><i class="qoz">2ddd3uuu</i>三重乐升 2 级</td>
+			<td><i class="qoz">2dd3uuu</i>三重乐升 6 级</td>
+			<td><i class="qoz">2d3uuu</i>三重乐升 3 级</td>
+			<td><i class="qoz">3uuu</i>三重乐升 7 级</td>
+			<td><i class="qoz">2u3uuu</i>三重乐重升 4 级</td>
+			<td><i class="qoz">2uu3uuu</i>三重乐重升 1 级</td>
+			<td><i class="qoz">2uuu3uuu</i>三重乐重升 5 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd3uu</i>重乐 7 级</td>
+			<td><i class="qoz">2dd3uu</i>重乐升 4 级</td>
+			<td><i class="qoz">2d3uu</i>重乐升 1 级</td>
+			<td><i class="qoz">3uu</i>重乐升 5 级</td>
+			<td><i class="qoz">2u3uu</i>重乐升 2 级</td>
+			<td><i class="qoz">2uu3uu</i>重乐升 6 级</td>
+			<td><i class="qoz">2uuu3uu</i>重乐升 3 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd3u</i>乐 5 级</td>
+			<td><i class="qoz">2dd3u</i>乐 2 级</td>
+			<td><i class="qoz">2d3u</i>乐 6 级</td>
+			<td><i class="qoz">3u</i>乐 3 级</td>
+			<td><i class="qoz">2u3u</i>乐 7 级</td>
+			<td><i class="qoz">2uu3u</i>乐升 4 级</td>
+			<td><i class="qoz">2uuu3u</i>乐升 1 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd</i>纯降 3 级</td>
+			<td><i class="qoz">2dd</i>纯降 7 级</td>
+			<td><i class="qoz">2d</i>纯 4 级</td>
+			<td><i class="qoz">0</i>纯 1 级</td>
+			<td><i class="qoz">2u</i>纯 5 级</td>
+			<td><i class="qoz">2uu</i>纯 2 级</td>
+			<td><i class="qoz">2uuu</i>纯 6 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd3d</i>哀降 1 级</td>
+			<td><i class="qoz">2dd3d</i>哀降 5 级</td>
+			<td><i class="qoz">2d3d</i>哀降 2 级</td>
+			<td><i class="qoz">3d</i>哀降 6 级</td>
+			<td><i class="qoz">2u3d</i>哀降 3 级</td>
+			<td><i class="qoz">2uu3d</i>哀降 7 级</td>
+			<td><i class="qoz">2uuu3d</i>哀 4 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd3dd</i>重哀重降 6 级</td>
+			<td><i class="qoz">2dd3dd</i>重哀重降 3 级</td>
+			<td><i class="qoz">2d3dd</i>重哀重降 7 级</td>
+			<td><i class="qoz">3dd</i>重哀降 4 级</td>
+			<td><i class="qoz">2u3dd</i>重哀降 1 级</td>
+			<td><i class="qoz">2uu3dd</i>重哀降 5 级</td>
+			<td><i class="qoz">2uuu3dd</i>重哀降 2 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd3ddd</i>三重哀重降 4 级</td>
+			<td><i class="qoz">2dd3ddd</i>三重哀重降 1 级</td>
+			<td><i class="qoz">2d3ddd</i>三重哀重降 5 级</td>
+			<td><i class="qoz">3ddd</i>三重哀重降 2 级</td>
+			<td><i class="qoz">2u3ddd</i>三重哀重降 6 级</td>
+			<td><i class="qoz">2uu3ddd</i>三重哀重降 3 级</td>
+			<td><i class="qoz">2uuu3ddd</i>三重哀重降 7 级</td>
+		</tr>
+	</tbody></table>
+	<table class="reference-table"><tbody>
+		<tr>
+			<td><i class="qoz">2ddd4uuu</i>三重厚重降 7 级</td>
+			<td><i class="qoz">2dd4uuu</i>三重厚降 4 级</td>
+			<td><i class="qoz">2d4uuu</i>三重厚降 1 级</td>
+			<td><i class="qoz">4uuu</i>三重厚降 5 级</td>
+			<td><i class="qoz">2u4uuu</i>三重厚降 2 级</td>
+			<td><i class="qoz">2uu4uuu</i>三重厚降 6 级</td>
+			<td><i class="qoz">2uuu4uuu</i>三重厚降 3 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd4uu</i>重厚降 1 级</td>
+			<td><i class="qoz">2dd4uu</i>重厚降 5 级</td>
+			<td><i class="qoz">2d4uu</i>重厚降 2 级</td>
+			<td><i class="qoz">4uu</i>重厚降 6 级</td>
+			<td><i class="qoz">2u4uu</i>重厚降 3 级</td>
+			<td><i class="qoz">2uu4uu</i>重厚降 7 级</td>
+			<td><i class="qoz">2uuu4uu</i>重厚 4 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd4u</i>厚降 2 级</td>
+			<td><i class="qoz">2dd4u</i>厚降 6 级</td>
+			<td><i class="qoz">2d4u</i>厚降 3 级</td>
+			<td><i class="qoz">4u</i>厚降 7 级</td>
+			<td><i class="qoz">2u4u</i>厚 4 级</td>
+			<td><i class="qoz">2uu4u</i>厚 1 级</td>
+			<td><i class="qoz">2uuu4u</i>厚 5 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd</i>纯降 3 级</td>
+			<td><i class="qoz">2dd</i>纯降 7 级</td>
+			<td><i class="qoz">2d</i>纯 4 级</td>
+			<td><i class="qoz">0</i>纯 1 级</td>
+			<td><i class="qoz">2u</i>纯 5 级</td>
+			<td><i class="qoz">2uu</i>纯 2 级</td>
+			<td><i class="qoz">2uuu</i>纯 6 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd4d</i>薄 4 级</td>
+			<td><i class="qoz">2dd4d</i>薄 1 级</td>
+			<td><i class="qoz">2d4d</i>薄 5 级</td>
+			<td><i class="qoz">4d</i>薄 2 级</td>
+			<td><i class="qoz">2u4d</i>薄 6 级</td>
+			<td><i class="qoz">2uu4d</i>薄 3 级</td>
+			<td><i class="qoz">2uuu4d</i>薄 7 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd4dd</i>重薄 5 级</td>
+			<td><i class="qoz">2dd4dd</i>重薄 2 级</td>
+			<td><i class="qoz">2d4dd</i>重薄 6 级</td>
+			<td><i class="qoz">4dd</i>重薄 3 级</td>
+			<td><i class="qoz">2u4dd</i>重薄 7 级</td>
+			<td><i class="qoz">2uu4dd</i>重薄升 4 级</td>
+			<td><i class="qoz">2uuu4dd</i>重薄升 1 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd4ddd</i>三重薄 6 级</td>
+			<td><i class="qoz">2dd4ddd</i>三重薄 3 级</td>
+			<td><i class="qoz">2d4ddd</i>三重薄 7 级</td>
+			<td><i class="qoz">4ddd</i>三重薄升 4 级</td>
+			<td><i class="qoz">2u4ddd</i>三重薄升 1 级</td>
+			<td><i class="qoz">2uu4ddd</i>三重薄升 5 级</td>
+			<td><i class="qoz">2uuu4ddd</i>三重薄升 2 级</td>
+		</tr>
+	</tbody></table>
+	<table class="reference-table"><tbody>
+		<tr>
+			<td><i class="qoz">2ddd5uuu</i>三重发重升 5 级</td>
+			<td><i class="qoz">2dd5uuu</i>三重发重升 2 级</td>
+			<td><i class="qoz">2d5uuu</i>三重发重升 6 级</td>
+			<td><i class="qoz">5uuu</i>三重发重升 3 级</td>
+			<td><i class="qoz">2u5uuu</i>三重发重升 7 级</td>
+			<td><i class="qoz">2uu5uuu</i>三重发三重升 4 级</td>
+			<td><i class="qoz">2uuu5uuu</i>三重发三重升 1 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd5uu</i>重发升 2 级</td>
+			<td><i class="qoz">2dd5uu</i>重发升 6 级</td>
+			<td><i class="qoz">2d5uu</i>重发升 3 级</td>
+			<td><i class="qoz">5uu</i>重发升 7 级</td>
+			<td><i class="qoz">2u5uu</i>重发重升 4 级</td>
+			<td><i class="qoz">2uu5uu</i>重发重升 1 级</td>
+			<td><i class="qoz">2uuu5uu</i>重发重升 5 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd5u</i>发 6 级</td>
+			<td><i class="qoz">2dd5u</i>发 3 级</td>
+			<td><i class="qoz">2d5u</i>发 7 级</td>
+			<td><i class="qoz">5u</i>发升 4 级</td>
+			<td><i class="qoz">2u5u</i>发升 1 级</td>
+			<td><i class="qoz">2uu5u</i>发升 5 级</td>
+			<td><i class="qoz">2uuu5u</i>发升 2 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd</i>纯降 3 级</td>
+			<td><i class="qoz">2dd</i>纯降 7 级</td>
+			<td><i class="qoz">2d</i>纯 4 级</td>
+			<td><i class="qoz">0</i>纯 1 级</td>
+			<td><i class="qoz">2u</i>纯 5 级</td>
+			<td><i class="qoz">2uu</i>纯 2 级</td>
+			<td><i class="qoz">2uuu</i>纯 6 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd5d</i>着重降 7 级</td>
+			<td><i class="qoz">2dd5d</i>着降 4 级</td>
+			<td><i class="qoz">2d5d</i>着降 1 级</td>
+			<td><i class="qoz">5d</i>着降 5 级</td>
+			<td><i class="qoz">2u5d</i>着降 2 级</td>
+			<td><i class="qoz">2uu5d</i>着降 6 级</td>
+			<td><i class="qoz">2uuu5d</i>着降 3 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd5dd</i>重着重降 4 级</td>
+			<td><i class="qoz">2dd5dd</i>重着重降 1 级</td>
+			<td><i class="qoz">2d5dd</i>重着重降 5 级</td>
+			<td><i class="qoz">5dd</i>重着重降 2 级</td>
+			<td><i class="qoz">2u5dd</i>重着重降 6 级</td>
+			<td><i class="qoz">2uu5dd</i>重着重降 3 级</td>
+			<td><i class="qoz">2uuu5dd</i>重着重降 7 级</td>
+		</tr>
+		<tr>
+			<td><i class="qoz">2ddd5ddd</i>三重着三重降 1 级</td>
+			<td><i class="qoz">2dd5ddd</i>三重着三重降 5 级</td>
+			<td><i class="qoz">2d5ddd</i>三重着三重降 2 级</td>
+			<td><i class="qoz">5ddd</i>三重着三重降 6 级</td>
+			<td><i class="qoz">2u5ddd</i>三重着三重降 3 级</td>
+			<td><i class="qoz">2uu5ddd</i>三重着三重降 7 级</td>
+			<td><i class="qoz">2uuu5ddd</i>三重着重降 4 级</td>
+		</tr>
+	</tbody></table>
+</body>
+</html>
